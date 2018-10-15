@@ -73,8 +73,8 @@ module Optimizely
 
       visitor_attributes = []
 
-      if attributes && attributes.keys
-        attributes&.keys&.each do |attribute_key|
+      if attributes && attributes.is_a?(Hash)
+        attributes.keys.each do |attribute_key|
           # Omit null attribute values
           attribute_value = attributes[attribute_key]
           unless attribute_value.nil?
