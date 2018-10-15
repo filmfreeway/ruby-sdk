@@ -73,18 +73,20 @@ module Optimizely
 
       visitor_attributes = []
 
-      attributes&.keys&.each do |attribute_key|
-        # Omit null attribute values
-        attribute_value = attributes[attribute_key]
-        unless attribute_value.nil?
-          attribute_id = @config.get_attribute_id attribute_key
-          if attribute_id
-            visitor_attributes.push(
-              entity_id: attribute_id,
-              key: attribute_key,
-              type: CUSTOM_ATTRIBUTE_FEATURE_TYPE,
-              value: attribute_value
-            )
+      if attributes && attributes.keys
+        attributes&.keys&.each do |attribute_key|
+          # Omit null attribute values
+          attribute_value = attributes[attribute_key]
+          unless attribute_value.nil?
+            attribute_id = @config.get_attribute_id attribute_key
+            if attribute_id
+              visitor_attributes.push(
+                entity_id: attribute_id,
+                key: attribute_key,
+                type: CUSTOM_ATTRIBUTE_FEATURE_TYPE,
+                value: attribute_value
+              )
+            end
           end
         end
       end
